@@ -1,7 +1,8 @@
 # C++
+##Lab №1
 ## Tasks
-- [ ] 1. Создать публичный репозиторий
-- [ ] 2. Выполнить задания в соответствии с своим вариантом **18**
+- [ ] 1. Создать публичный репозиторий;
+- [ ] 2. Выполнить задания в соответствии с своим  **18** вариантом.
 
 ## Tutorial
 **1. Базовый уровень**
@@ -115,5 +116,72 @@ for (int i = 0; i < N; i++)
 			}
 		}
 	}
+}
+```
+**2. Высокий уровень**
+```bash
+Описать структуру с именем NOТЕ, содержащую поля: Name — фамилия и инициалы, TELE — номер телефона, DATE — дата рождения (год.месяц, число)
+		Написать программу, выполняющую:
+			— ввод с клавиатуры данных в массив BLOCKNOTE состоящий из 10
+			структур типа NOTE, записи должны быть упорядочены по возрастанию даты рождения;
+			- вывод на экран сведений о человеке, номер телефон которого введен с клавиатуры;
+			- усли такого человека нет - выдать сообщение
+```
+
+```ShellSession
+do//Сортировка по возрастанию даты рождения
+{
+	swapped = false;
+	for (int count = 0; count < N - 1; count++)
+	{
+		if (BLOCKNOTE[count].birthday.year > BLOCKNOTE[count + 1].birthday.year)
+		{
+			swap(BLOCKNOTE[count], BLOCKNOTE[count + 1]);
+			swapped = true;
+		}
+		else if ((BLOCKNOTE[count].birthday.year == BLOCKNOTE[count + 1].birthday.year) && (BLOCKNOTE[count].birthday.month > BLOCKNOTE[count + 1].birthday.month))
+		{
+			swap(BLOCKNOTE[count], BLOCKNOTE[count + 1]);
+			swapped = true;
+		}
+		else if ((BLOCKNOTE[count].birthday.year == BLOCKNOTE[count + 1].birthday.year) && (BLOCKNOTE[count].birthday.month == BLOCKNOTE[count + 1].birthday.month) && (BLOCKNOTE[count].birthday.day > BLOCKNOTE[count + 1].birthday.day))
+		{
+			swap(BLOCKNOTE[count], BLOCKNOTE[count + 1]);
+			swapped = true;
+		}
+	}
+} while (swapped);
+```
+
+```ShellSession
+cout << "------------------" << endl;
+cout << "Search by phone number: ";
+while (!(cin >> number))//Проверка на ввод номера
+{
+	cout << "Search by phone number: ";
+	cin >> number;
+	cin.clear();
+	cin.ignore(std::cin.rdbuf()->in_avail());
+}
+
+for (int i = 0; i < N; i++)//Вывод
+{
+	if (number == BLOCKNOTE[i].TELE)//Поиск
+	{
+		cout << "-----------------------" << endl;
+		cout << "FIO: " << BLOCKNOTE[i].F << " " << BLOCKNOTE[i].I << "." << BLOCKNOTE[i].O << ".";
+		cout << "\nTelephone: " << BLOCKNOTE[i].TELE;
+		cout << "\nBirthday: " << BLOCKNOTE[i].birthday.day << "." << BLOCKNOTE[i].birthday.month << "." << BLOCKNOTE[i].birthday.year << endl;
+		cout << "-----------------------" << endl;
+		break;
+	}
+	else 
+	{
+		sum++;
+	}
+}
+if (sum == N)//Если не нашел
+{
+	cout << "No such person found.";
 }
 ```
